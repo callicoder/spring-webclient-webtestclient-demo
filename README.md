@@ -1,4 +1,4 @@
-# Learn how to consume and test REST APIs using Spring 5's Reactive WebClient and WebTestClient.
+# Consume and Test REST APIs using Spring 5's Reactive WebClient and WebTestClient.
 
 ## Steps to Setup
 
