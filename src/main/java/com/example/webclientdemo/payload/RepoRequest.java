@@ -18,6 +18,16 @@ public class RepoRequest {
     @JsonProperty("private")
     private Boolean isPrivate;
 
+
+    public RepoRequest() {
+
+    }
+
+    public RepoRequest(@NotBlank String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }

@@ -81,12 +81,12 @@ public class GithubClient {
 
 
     private ExchangeFilterFunction logRequest() {
-        return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
+        return (clientRequest, next) -> {
             logger.info("Request: {} {}", clientRequest.method(), clientRequest.url());
             clientRequest.headers()
                     .forEach((name, values) -> values.forEach(value -> logger.info("{}={}", name, value)));
-            return Mono.just(clientRequest);
-        });
+            return next.exchange(clientRequest);
+        };
     }
 
 }
