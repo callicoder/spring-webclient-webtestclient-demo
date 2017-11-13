@@ -21,7 +21,7 @@ public class WebclientDemoApplicationTests {
 	private WebTestClient webTestClient;
 
 	@Test
-	public void testCreateRepository() {
+	public void testCreateGithubRepository() {
 		RepoRequest repoRequest = new RepoRequest("test-webclient-repository", "Repository created for testing WebClient");
 
 		webTestClient.post().uri("/api/repos")
@@ -37,7 +37,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testGetAllRepositories() {
+	public void testGetAllGithubRepositories() {
 		webTestClient.get().uri("/api/repos")
 				.accept(MediaType.APPLICATION_JSON_UTF8)
 				.exchange()
@@ -47,7 +47,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testGetSingleRepository() {
+	public void testGetSingleGithubRepository() {
 		webTestClient.get()
 				.uri("/api/repos/{repo}", "test-webclient-repository")
 				.exchange()
@@ -58,7 +58,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testEditRepository() {
+	public void testEditGithubRepository() {
 		RepoRequest newRepoDetails = new RepoRequest("updated-webclient-repository", "Updated name and description");
 		webTestClient.patch()
 				.uri("/api/repos/{repo}", "test-webclient-repository")
@@ -73,7 +73,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testDeleteRepository() {
+	public void testDeleteGithubRepository() {
 		webTestClient.delete()
 				.uri("/api/repos/{repo}", "updated-webclient-repository")
 				.exchange()

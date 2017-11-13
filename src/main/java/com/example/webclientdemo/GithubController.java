@@ -30,28 +30,28 @@ public class GithubController {
     private static final Logger logger = LoggerFactory.getLogger(GithubController.class);
 
     @GetMapping("/repos")
-    public Flux<GithubRepo> listRepositories() {
-        return githubClient.listRepositories();
+    public Flux<GithubRepo> listGithubRepositories() {
+        return githubClient.listGithubRepositories();
     }
 
     @PostMapping("/repos")
-    public Mono<GithubRepo> createRepository(@RequestBody RepoRequest repoRequest) {
-        return githubClient.createRepository(repoRequest);
+    public Mono<GithubRepo> createGithubRepository(@RequestBody RepoRequest repoRequest) {
+        return githubClient.createGithubRepository(repoRequest);
     }
 
     @GetMapping("/repos/{repo}")
-    public Mono<GithubRepo> getRepository(@PathVariable String repo) {
-        return githubClient.getRepository(appProperties.getGithub().getUsername(), repo);
+    public Mono<GithubRepo> getGithubRepository(@PathVariable String repo) {
+        return githubClient.getGithubRepository(appProperties.getGithub().getUsername(), repo);
     }
 
     @PatchMapping("/repos/{repo}")
-    public Mono<GithubRepo> editRepository(@PathVariable String repo, @Valid @RequestBody RepoRequest repoRequest) {
-        return githubClient.editRepository(appProperties.getGithub().getUsername(), repo, repoRequest);
+    public Mono<GithubRepo> editGithubRepository(@PathVariable String repo, @Valid @RequestBody RepoRequest repoRequest) {
+        return githubClient.editGithubRepository(appProperties.getGithub().getUsername(), repo, repoRequest);
     }
 
     @DeleteMapping("/repos/{repo}")
-    public Mono<Void> deleteRepository(@PathVariable String repo) {
-        return githubClient.deleteRepository(appProperties.getGithub().getUsername(), repo);
+    public Mono<Void> deleteGithubRepository(@PathVariable String repo) {
+        return githubClient.deleteGithubRepository(appProperties.getGithub().getUsername(), repo);
     }
 
 

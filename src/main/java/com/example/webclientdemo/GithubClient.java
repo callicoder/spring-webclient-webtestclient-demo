@@ -41,7 +41,7 @@ public class GithubClient {
     }
 
 
-    public Flux<GithubRepo> listRepositories() {
+    public Flux<GithubRepo> listGithubRepositories() {
          return webClient.get()
                 .uri("/user/repos?sort={sortField}&direction={sortDirection}", "updated", "desc")
                 .exchange()
@@ -49,7 +49,7 @@ public class GithubClient {
 
     }
 
-    public Mono<GithubRepo> createRepository(RepoRequest repoRequest) {
+    public Mono<GithubRepo> createGithubRepository(RepoRequest repoRequest) {
         return webClient.post()
                 .uri("/user/repos")
                 .body(Mono.just(repoRequest), RepoRequest.class)
@@ -57,14 +57,14 @@ public class GithubClient {
                 .bodyToMono(GithubRepo.class);
     }
 
-    public Mono<GithubRepo> getRepository(String owner, String repo) {
+    public Mono<GithubRepo> getGithubRepository(String owner, String repo) {
         return webClient.get()
                 .uri("/repos/{owner}/{repo}", owner, repo)
                 .retrieve()
                 .bodyToMono(GithubRepo.class);
     }
 
-    public Mono<GithubRepo> editRepository(String owner, String repo, RepoRequest repoRequest) {
+    public Mono<GithubRepo> editGithubRepository(String owner, String repo, RepoRequest repoRequest) {
         return webClient.patch()
                 .uri("/repos/{owner}/{repo}", owner, repo)
                 .body(BodyInserters.fromObject(repoRequest))
@@ -72,7 +72,7 @@ public class GithubClient {
                 .bodyToMono(GithubRepo.class);
     }
 
-    public Mono<Void> deleteRepository(String owner, String repo) {
+    public Mono<Void> deleteGithubRepository(String owner, String repo) {
         return webClient.delete()
                 .uri("/repos/{owner}/{repo}", owner, repo)
                 .retrieve()
