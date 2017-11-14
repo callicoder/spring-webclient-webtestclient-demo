@@ -3,8 +3,10 @@ package com.example.webclientdemo;
 import com.example.webclientdemo.payload.GithubRepo;
 import com.example.webclientdemo.payload.RepoRequest;
 import org.assertj.core.api.Assertions;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -15,13 +17,14 @@ import reactor.core.publisher.Mono;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WebclientDemoApplicationTests {
 
 	@Autowired
 	private WebTestClient webTestClient;
 
 	@Test
-	public void testCreateGithubRepository() {
+	public void test1CreateGithubRepository() {
 		RepoRequest repoRequest = new RepoRequest("test-webclient-repository", "Repository created for testing WebClient");
 
 		webTestClient.post().uri("/api/repos")
@@ -37,7 +40,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testGetAllGithubRepositories() {
+	public void test2GetAllGithubRepositories() {
 		webTestClient.get().uri("/api/repos")
 				.accept(MediaType.APPLICATION_JSON_UTF8)
 				.exchange()
@@ -47,7 +50,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testGetSingleGithubRepository() {
+	public void test3GetSingleGithubRepository() {
 		webTestClient.get()
 				.uri("/api/repos/{repo}", "test-webclient-repository")
 				.exchange()
@@ -58,7 +61,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testEditGithubRepository() {
+	public void test4EditGithubRepository() {
 		RepoRequest newRepoDetails = new RepoRequest("updated-webclient-repository", "Updated name and description");
 		webTestClient.patch()
 				.uri("/api/repos/{repo}", "test-webclient-repository")
@@ -73,7 +76,7 @@ public class WebclientDemoApplicationTests {
 	}
 
 	@Test
-	public void testDeleteGithubRepository() {
+	public void test5DeleteGithubRepository() {
 		webTestClient.delete()
 				.uri("/api/repos/{repo}", "updated-webclient-repository")
 				.exchange()

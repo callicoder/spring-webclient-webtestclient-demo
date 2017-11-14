@@ -23,16 +23,17 @@ import reactor.core.publisher.Mono;
 public class GithubClient {
     private static final String GITHUB_V3_MIME_TYPE = "application/vnd.github.v3+json";
     private static final String GITHUB_API_BASE_URL = "https://api.github.com";
+    private static final String USER_AGENT = "Spring 5 WebClient";
     private static final Logger logger = LoggerFactory.getLogger(GithubClient.class);
 
     private final WebClient webClient;
 
     @Autowired
     public GithubClient(AppProperties appProperties) {
-
         this.webClient = WebClient.builder()
                 .baseUrl(GITHUB_API_BASE_URL)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, GITHUB_V3_MIME_TYPE)
+                .defaultHeader(HttpHeaders.USER_AGENT, USER_AGENT)
                 .filter(ExchangeFilterFunctions
                         .basicAuthentication(appProperties.getGithub().getUsername(),
                                 appProperties.getGithub().getToken()))
@@ -43,10 +44,10 @@ public class GithubClient {
 
     public Flux<GithubRepo> listGithubRepositories() {
          return webClient.get()
-                .uri("/user/repos?sort={sortField}&direction={sortDirection}", "updated", "desc")
+                .uri("/user/repos?sort={sortField}&direction={sortDirection}",
+                        "updated", "desc")
                 .exchange()
                 .flatMapMany(clientResponse -> clientResponse.bodyToFlux(GithubRepo.class));
-
     }
 
     public Mono<GithubRepo> createGithubRepository(RepoRequest repoRequest) {
@@ -79,7 +80,6 @@ public class GithubClient {
                 .bodyToMono(Void.class);
     }
 
-
     private ExchangeFilterFunction logRequest() {
         return (clientRequest, next) -> {
             logger.info("Request: {} {}", clientRequest.method(), clientRequest.url());
@@ -88,5 +88,4 @@ public class GithubClient {
             return next.exchange(clientRequest);
         };
     }
-
 }

@@ -57,7 +57,8 @@ public class GithubController {
 
     @ExceptionHandler(WebClientResponseException.class)
     public ResponseEntity<String> handleWebClientResponseException(WebClientResponseException ex) {
-        logger.error("Error from WebClient - Status {}, Body {}", ex.getRawStatusCode(), ex.getResponseBodyAsString(), ex);
+        logger.error("Error from WebClient - Status {}, Body {}", ex.getRawStatusCode(),
+                ex.getResponseBodyAsString(), ex);
         return ResponseEntity.status(ex.getRawStatusCode()).body(ex.getResponseBodyAsString());
     }
 }
