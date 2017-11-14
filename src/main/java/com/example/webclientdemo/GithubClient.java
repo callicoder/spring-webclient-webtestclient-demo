@@ -50,10 +50,10 @@ public class GithubClient {
                 .flatMapMany(clientResponse -> clientResponse.bodyToFlux(GithubRepo.class));
     }
 
-    public Mono<GithubRepo> createGithubRepository(RepoRequest repoRequest) {
+    public Mono<GithubRepo> createGithubRepository(RepoRequest createRepoRequest) {
         return webClient.post()
                 .uri("/user/repos")
-                .body(Mono.just(repoRequest), RepoRequest.class)
+                .body(Mono.just(createRepoRequest), RepoRequest.class)
                 .retrieve()
                 .bodyToMono(GithubRepo.class);
     }
@@ -65,10 +65,10 @@ public class GithubClient {
                 .bodyToMono(GithubRepo.class);
     }
 
-    public Mono<GithubRepo> editGithubRepository(String owner, String repo, RepoRequest repoRequest) {
+    public Mono<GithubRepo> editGithubRepository(String owner, String repo, RepoRequest editRepoRequest) {
         return webClient.patch()
                 .uri("/repos/{owner}/{repo}", owner, repo)
-                .body(BodyInserters.fromObject(repoRequest))
+                .body(BodyInserters.fromObject(editRepoRequest))
                 .retrieve()
                 .bodyToMono(GithubRepo.class);
     }
