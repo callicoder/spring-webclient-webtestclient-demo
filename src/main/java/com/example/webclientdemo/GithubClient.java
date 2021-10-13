@@ -15,9 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/**
- * Created by rajeevkumarsingh on 10/11/17.
- */
+
 
 @Service
 public class GithubClient {

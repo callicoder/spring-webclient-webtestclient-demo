@@ -2,9 +2,7 @@ package com.example.webclientdemo.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Created by rajeevkumarsingh on 10/11/17.
- */
+
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
     private final Github github = new Github();

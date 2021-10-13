@@ -14,9 +14,7 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
-/**
- * Created by rajeevkumarsingh on 11/11/17.
- */
+
 @RestController
 @RequestMapping("/api")
 public class GithubController {

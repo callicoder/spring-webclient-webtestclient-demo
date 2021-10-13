@@ -2,9 +2,7 @@ package com.example.webclientdemo.payload;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Created by rajeevkumarsingh on 12/11/17.
- */
+
 
 public class GithubRepo {
     private Long id;

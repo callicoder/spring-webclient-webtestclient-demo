@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 
-/**
- * Created by rajeevkumarsingh on 12/11/17.
- */
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RepoRequest {
     @NotBlank
