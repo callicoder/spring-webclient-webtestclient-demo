@@ -44,8 +44,7 @@ public class GithubClient {
          return webClient.get()
                 .uri("/user/repos?sort={sortField}&direction={sortDirection}",
                         "updated", "desc")
-                .exchange()
-                .flatMapMany(clientResponse -> clientResponse.bodyToFlux(GithubRepo.class));
+                 .exchangeToFlux(response->response.bodyToFlux(GithubRepo.class));
     }
 
     public Mono<GithubRepo> createGithubRepository(RepoRequest createRepoRequest) {
@@ -66,7 +65,7 @@ public class GithubClient {
     public Mono<GithubRepo> editGithubRepository(String owner, String repo, RepoRequest editRepoRequest) {
         return webClient.patch()
                 .uri("/repos/{owner}/{repo}", owner, repo)
-                .body(BodyInserters.fromObject(editRepoRequest))
+                .body(BodyInserters.fromValue(editRepoRequest))
                 .retrieve()
                 .bodyToMono(GithubRepo.class);
     }
